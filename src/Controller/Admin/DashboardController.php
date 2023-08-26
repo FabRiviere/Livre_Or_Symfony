@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Admin;
 use App\Entity\Comment;
 use App\Entity\Conference;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,5 +51,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Back to the website', 'fas fa-home', 'homepage');
         yield MenuItem::linkToCrud('Conferences', 'fas fa-map-marker-alt', Conference::class);
         yield MenuItem::linkToCrud('Comments', 'fas fa-comments', Comment::class);
+        yield MenuItem::linkToCrud('Users', 'fas fa-user', Admin::class);
     }
 }

@@ -1,0 +1,44 @@
+<header>
+	<h1>
+		<a href="{{ path('homepage') }}">Guestbook</a>
+	</h1>
+	<div class="col-md-6 d-flex">
+		<div class="text-center text-md-right">
+			<ul class="header_list list_none">
+                {% for conference in conferences %}
+                    <li>
+                        <a href="{{ path('conference', { slug: conference.slug }) }}">{{ conference }}</a>
+                    </li>
+                {% endfor %}				
+				{% if app.user %}
+					<li>
+						<a href="{{ path('app_logout') }}">
+							<i class="ti-user"></i>
+							<span>Logout</span>
+						</a>
+					</li>
+				{% else %}
+					<li>
+						<a href="{{ path('app_login') }}">
+							<i class="ti-user"></i>
+							<span>Login</span>
+						</a>
+					</li>
+					<li class="list_none">
+						<a href="{{ path('app_register') }}">
+							<i class="fas fa-sign-in-alt"></i>
+							<span>Register</span>
+						</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+	{# <ul class="list_none">
+		{% for conference in conferences %}
+			<li class="list_none">
+				<a href="{{ path('conference', { slug: conference.slug }) }}">{{ conference }}</a>
+			</li>
+		{% endfor %}
+	</ul> #}
+</header>
