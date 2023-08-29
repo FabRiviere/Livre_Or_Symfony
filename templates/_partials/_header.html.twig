@@ -1,4 +1,10 @@
-<header>
+{% for conference in conferences %}
+    <a class="nav-conference" href="{{ path('conference', { slug: conference.slug }) }}">
+        {{ conference }}
+    </a>
+{% endfor %}
+
+{# <header>
 	<h1>
 		<a href="{{ path('homepage') }}">Guestbook</a>
 	</h1>
@@ -34,11 +40,5 @@
 			</ul>
 		</div>
 	</div>
-	{# <ul class="list_none">
-		{% for conference in conferences %}
-			<li class="list_none">
-				<a href="{{ path('conference', { slug: conference.slug }) }}">{{ conference }}</a>
-			</li>
-		{% endfor %}
-	</ul> #}
-</header>
+	
+</header> #}

@@ -1,50 +1,85 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>
-			{% block title %}Welcome!
-			{% endblock %}
-		</title>
-		<link
-		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="The Guestbook for Symfony 6">
-        <meta name="keywords" content="">
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>Guestbook - Activateur Web</title>
-        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+        <title>{% block title %}Welcome!{% endblock %}</title>
 
-        <link rel="stylesheet" href="/assets/style.css">
-		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
-		{% endblock %}
+        {% block stylesheets %}
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,500i,600,600i&display=swap" rel="stylesheet" />
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+	<body>
+
+		<header class="header">
+            <h1 class="visually-hidden">
+                Conference Guestbook
+            </h1>
+
+            <nav class="navbar navbar-expand-xl navbar-light bg-light">
+                <div class="container mt-4 mb-3">
+                    <a class="navbar-brand me-4 pr-2" href="{{ path('homepage') }}">
+                        &#128217; Conference Guestbook
+                    </a>
+
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#header-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Show/Hide navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="header-menu">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item me-3">
+                                <a class="nav-link" href="{{ path('admin') }}">
+                                    Admin
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <nav class="bg-light border-bottom">
+                <div class="container">
+                    {# {{ render_esi(path('conference_header')) }} #}
+					{% include "_partials/_header.html.twig" %}
+                </div>
+            </nav>
+        </header>
+
+		<main role="main" class="container mt-5">
+			{% if app.user and app.user.isVerified == false %}
+				<div class="alert alert-warning alert-dismissible" role="alert">
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					<div class="alert-message">
+						<strong>Votre compte n'est pas activé</strong>
+						<a href="{{ path('app_resend_verif')}}">
+							Renvoyer le lien d'activation
+						</a>                     
+					</div>
+				</div>
+			{% endif %}
+
+			{# Lien d'activation envoyé #}
+			{% for flash in app.flashes('resend_verif_success') %}
+				<div class="alert alert-success">{{ flash }}</div>
+			{% endfor %}
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer class="mt-7 px-3 py-5 text-center text-muted">
+            <p>
+                Conference Guestbook
+            </p>
+            <p>
+                <a href="#" class="text-white">Back to top</a>
+            </p>
+        </footer>
 
 		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
-		{% endblock %}
-	</head>
-	<body>
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
 		
-		{% include "_partials/_header.html.twig" %}
-
-        {% if app.user and app.user.isVerified == false %}
-            <div class="alert alert-warning alert-dismissible" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <div class="alert-message">
-                    <strong>Votre compte n'est pas activé</strong>
-                    <a href="{{ path('app_resend_verif')}}">
-                        Renvoyer le lien d'activation
-                    </a>                     
-                </div>
-            </div>
-        {% endif %}
-
-        {# Lien d'activation envoyé #}
-        {% for flash in app.flashes('resend_verif_success') %}
-    	    <div class="alert alert-success">{{ flash }}</div>
-	    {% endfor %}
-		{% block body %}{% endblock %}
 	</body>
 </html>

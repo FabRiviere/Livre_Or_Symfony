@@ -63,36 +63,35 @@
 		                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 								</div>
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-								<div class="login_footer form-group">
-									<div class="chek-form">
-										<div class="custome-checkbox">
+								<div class="login_footer form-group text-center mt-5">
+									
+										<div class="form-group">
+											<button type="submit" class="btn btn-fill-out btn-block btn-primary" name="login">Log in</button>
+										</div>
+										<a href="{{ path('app_forgotten_password') }}">Forgot password?</a>
+										{# <div class="custome-checkbox">
 											<input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
 											<label class="form-check-label" for="exampleCheckbox1">
 												<span>Remember me</span>
 											</label>
-										</div>
-									</div>
-									<a href="{{ path('app_forgotten_password') }}">Forgot password?</a>
-								</div>
-								<div class="form-group">
-									<button type="submit" class="btn btn-fill-out btn-block" name="login">Log in</button>
+										</div> #}
+									
 								</div>
 							</form>
-							<div class="different_login">
+							<div class="different_login text-center">
 								<span>
 									or</span>
+								<div>
+									
+										<a href="#" class="btn btn-facebook btn-primary m-2">
+											<i class="ion-social-facebook"></i>Facebook</a>
+									
+										<a href="#" class="btn btn-google btn-primary m-2">
+											<i class="ion-social-googleplus"></i>Google</a>
+									
+								</div>
 							</div>
-							<ul class="btn-login list_none text-center">
-								<li>
-									<a href="#" class="btn btn-facebook">
-										<i class="ion-social-facebook"></i>Facebook</a>
-								</li>
-								<li>
-									<a href="#" class="btn btn-google">
-										<i class="ion-social-googleplus"></i>Google</a>
-								</li>
-							</ul>
-							<div class="form-note text-center">Don't Have an Account?
+							<div class="form-note text-center m-5">Don't Have an Account?
 								<a href="{{ path('app_register') }}">Sign up now</a>
 							</div>
 						</div>
